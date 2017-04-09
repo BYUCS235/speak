@@ -61,6 +61,35 @@ The generated text now sounds a lot more readable and doesn't get stuck in an in
 ```
 I looked and people yea even he read he beheld the angel And I have suffered all the flesh and to pass that I might preserve his God of the cross and I have dreamed a wise purpose in God suffer those that As the younger brother Nephi did inquire of the words he spake unto the Lord hath spanned the engravings which was truly chastened because of the dust yea in dominion and also thought to be a man into the wickedness of my bow for the captivity of men to pass that after I was also was prepared 
 ```
-But we are only looking one word ahead in the context.  We would really like to use a phrase as a key so that we can learn multiple word context.  So lets change the key for the map to be a deque of strings.  Then we can push words onto one end of the deque and pop words off of the end of the deque and use the deque to capture the context of a phrase.
+But we are only looking one word ahead in the context and the generated text still doesn't sound very good.  We would really like to use a phrase as a key so that we can learn multiple word context.  So lets change the key for the map to be a deque of strings.  Then we can push words onto one end of the deque and pop words off of the end of the deque and use the deque to capture the context of a phrase.
 ```c++
+    map <deque <string>, vector<string>> wordmap;
+    deque <string> state;
+    state.push_back("");
+    state.push_back("");
+    for(auto s:tokens) {
+        cout << state[0]<<" "<<state[1]<<"="<<s<<endl;
+        wordmap[state].push_back(s);
+        state.push_back(s);
+        state.pop_front();
+    }
 ```
+And now that the map has learned the next word from a context of multiple words, we can generate text using a deque as a key.
+```c++
+    deque <string> current;
+    current.push_back("");
+    current.push_back("");
+
+    for(int i =0; i < 100; i++) {
+        int ind = rand() % wordmap[current].size();
+        cout << wordmap[current][ind]<<" ";
+        current.push_back(wordmap[current][ind]);
+        current.pop_front();
+    }
+    cout << endl;
+```
+The text that is generated now sound much more like english.
+```
+I Nephi being a natural branch of the seed of thy seed And at that day that they were white and exceedingly fair and white And it came to pass that I beheld your mother Sariah was exceedingly great mist of darkness yea even so much was his mind swallowed up in other words I remembered the words of the first shall be cast off forever And while the angel spake and showed himself unto the word of God after I had spoken unto you the kingdom of God which had been a world And he beheld the whore of 
+```
+Now you get the general idea, experiment with different ways of capturing even longer context to see if it improves the generated text.  And try your code on other [gutenberg](https://www.gutenberg.org/) texts to tune your code to different inputs.  You will have to determine rubrics for what you think it higher quality generated text.  Be ready to explain what you did to a partner when we pass off the lab.
