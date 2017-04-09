@@ -9,6 +9,6 @@ If you are reading english text, the context of words in a phrase can be represe
 
 Once you have trained this map from a deque to a vector of next words, you can generate text that sounds like the document by choosing a random key from the Map, then follow that key to a random next word.  Then look up the deque containing generated words to find the next word in your generated text.
 
-To start with, you should make sure you can read in the words from a book and place them in a vector of strings.  We did this in the last learning activity, so make sure that code is working.  If you haven't got this working, go through the [sets](https://github.com/BYUCS235/sets) learning activity.
+To start with, you should make sure you can read in the words from a book and place them in a vector of strings.  We did this in the last learning activity, so make sure that code is working.  If you haven't got this working, go through the [sets learning activity](https://github.com/BYUCS235/sets).
 ```c++
 ```
