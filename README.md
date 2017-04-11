@@ -92,4 +92,17 @@ The text that is generated now sound much more like english.
 ```
 I Nephi being a natural branch of the seed of thy seed And at that day that they were white and exceedingly fair and white And it came to pass that I beheld your mother Sariah was exceedingly great mist of darkness yea even so much was his mind swallowed up in other words I remembered the words of the first shall be cast off forever And while the angel spake and showed himself unto the word of God after I had spoken unto you the kingdom of God which had been a world And he beheld the whore of 
 ```
+But there is one problem. If you run the code on the Gettysburg.txt file, you will notice that the program displays a floating point exception.  If the vector associated with the deque is empty, then the % operator will issue a divide by zero.  This will occur any time the last two words in the document are unique since there will be nothing following them.  In order to fix this, you will need to check to see if the map entry has a zero size vector and do something else.  One option is to go back to the initial two blank strings like this:
+```c++
+        if(wordmap[current].size() != 0) {
+            int ind = rand() % wordmap[current].size();
+            cout << wordmap[current][ind]<<" ";
+            current.push_back(wordmap[current][ind]);
+            current.pop_front();
+        } else {
+            current.clear();
+            current.push_back("");
+            current.push_back("");
+        }
+```
 Now you get the general idea, experiment with different ways of capturing even longer context to see if it improves the generated text.  And try your code on other [gutenberg](https://www.gutenberg.org/) texts to tune your code to different inputs.  You will have to determine rubrics for what you think it higher quality generated text.  Be ready to explain what you did to a partner when we pass off the lab.
